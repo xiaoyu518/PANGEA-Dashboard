@@ -1,6 +1,6 @@
-# PANGEA_Pipeline v0.1
+# PANGEA Pipeline v0.1
 
-For phylodynamic analysis of pangea data from PANGEA database.
+For phylodynamic analysis of pangea data from PANGEA project.
 
 Alignment Pipeline:
 
