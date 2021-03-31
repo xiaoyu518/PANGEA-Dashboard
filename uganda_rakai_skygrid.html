@@ -23,82 +23,82 @@
 			data: {url: "https://github.com/xiaoyu518/Pangea_pipeline/blob/master/Uganda_Rakai.tsv"},
 	 		vconcat: [
     			{
-					width: 750,
-					height: 350,
-					view: { stroke: "" },
-  "layer": [
-  "data": {"url": "https://github.com/xiaoyu518/Pangea_pipeline/blob/master/Uganda_Rakai.tsv"},
-  "layer": [
-            {
-            "mark": {
-                "type": "errorband", 
-                "clip": true,
-                "opacity": 0.3},
-            "encoding": {
-                "y": {
-                "field": "Upper",
-                "type": "quantitative",
-                "title": "Skygrid Plot",
-                "axis": {"titleColor": "#85A9C5"},
-                "scale": { "type": "log", "domain": [0.1, 1000000]}
-                },
-                "y2": {
-                "field": "Lower"
-                },
-                "x": {
-                "field": "Time",
-                    "type": "temporal",
-                "axis": {"title": "Year"}
-                }
-            }
-            },
-                {
-                "mark": {
-                    "stroke": "#85A9C5",
-                    "clip": true, 
-                    "opacity":0.7,
-                    "type": "line"
-                    },
-                "encoding": {
-                    "y": {
-                    "field": "Mean",
-                    "type": "quantitative",
-                    "axis": {
-                        "titleColor": "#85A9C5",
-                        "labels":false,
-                        "title":"",
-                        "ticks":false},
-                    "scale": { "type": "log", "domain": [0.1, 1000000]}
-                    },
-                    "x": {
-                    "field": "Date",
-                        "type": "temporal",
-                    "axis": {"title": "Year"}
-                    }
-                }
-            },
-            {
-            "data": {"url":"https://github.com/xiaoyu518/Pangea_pipeline/blob/master/Uganda_Rakai_samplesize.csv"},
-                "mark": {"stroke": "#c58595", "type": "tick"},
-                "encoding": {
-                    "y": {
-                    "field": "sampleSize",
-                    "title": "Sample Size",
-                    "type": "ordinal",
-                    "axis": {
-                        "titleColor":"#c58595"
-                        },
-                    "scale": {
-                        "reverse":true,
-                        "domain": {"unionWith":[1,10]}}
-                    },
-                    "x": {
-                    "field": "Date",
-                        "type": "temporal",
-                    "axis": {"title": "Year"}
-                    }
-                }
-            }
+			width: 750,
+			height: 350,
+			view: { stroke: "" },
+				  "layer": [
+				  "data": {"url": "https://github.com/xiaoyu518/Pangea_pipeline/blob/master/Uganda_Rakai.tsv"},
+				  "layer": [
+					    {
+					    "mark": {
+						"type": "errorband", 
+						"clip": true,
+						"opacity": 0.3},
+					    "encoding": {
+						"y": {
+						"field": "Upper",
+						"type": "quantitative",
+						"title": "Skygrid Plot",
+						"axis": {"titleColor": "#85A9C5"},
+						"scale": { "type": "log", "domain": [0.1, 1000000]}
+						},
+						"y2": {
+						"field": "Lower"
+						},
+						"x": {
+						"field": "Time",
+						    "type": "temporal",
+						"axis": {"title": "Year"}
+						}
+					    }
+					    },
+						{
+						"mark": {
+						    "stroke": "#85A9C5",
+						    "clip": true, 
+						    "opacity":0.7,
+						    "type": "line"
+						    },
+						"encoding": {
+						    "y": {
+						    "field": "Mean",
+						    "type": "quantitative",
+						    "axis": {
+							"titleColor": "#85A9C5",
+							"labels":false,
+							"title":"",
+							"ticks":false},
+						    "scale": { "type": "log", "domain": [0.1, 1000000]}
+						    },
+						    "x": {
+						    "field": "Date",
+							"type": "temporal",
+						    "axis": {"title": "Year"}
+						    }
+						}
+					    },
+					    {
+					    "data": {"url":"https://github.com/xiaoyu518/Pangea_pipeline/blob/master/Uganda_Rakai_samplesize.csv"},
+						"mark": {"stroke": "#c58595", "type": "tick"},
+						"encoding": {
+						    "y": {
+						    "field": "sampleSize",
+						    "title": "Sample Size",
+						    "type": "ordinal",
+						    "axis": {
+							"titleColor":"#c58595"
+							},
+						    "scale": {
+							"reverse":true,
+							"domain": {"unionWith":[1,10]}}
+						    },
+						    "x": {
+						    "field": "Date",
+							"type": "temporal",
+						    "axis": {"title": "Year"}
+					}
+				}
+			}
 		]			
 	};
 
