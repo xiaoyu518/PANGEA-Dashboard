@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Legend Interaction Test</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style media="screen">
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="vis"></div>
+    <script>
+    	// Assign the specification to a local variable vlSpec.
+    	var vlSpec = {
+			"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": {
+                "text": "Source Sink Ratios for different Origins",
+                "fontSize":18,
+                "offset":12
+            },
+            "width": 450, "height": 300,
+            "data": {
+                    "values": [
+                        {"cohort": "PartnerTanzania", "ss_ratio": -0.46, "Origin": "Partner"},
+                        {"cohort": "PartnerSouthAfrica", "ss_ratio": -0.167, "Origin": "Partner"},
+                        {"cohort": "PartnerUganda", "ss_ratio": 0.396, "Origin": "Partner"},
+                        {"cohort": "PartnerBotswana", "ss_ratio": 0.234, "Origin": "Partner"},
+                        {"cohort": "PartnerKenya", "ss_ratio": 0.037, "Origin": "Partner"},
+                        {"cohort": "Popart-Copperbelt", "ss_ratio": -0.117, "Origin": "Zambia"},
+                        {"cohort": "Popart-Central", "ss_ratio": -0.049, "Origin": "Zambia"},
+                        {"cohort": "Popart-Southern", "ss_ratio": 0.216, "Origin": "Zambia"},
+                        {"cohort": "MRCUganda", "ss_ratio": -0.29, "Origin": "Uganda"},
+                        {"cohort": "PartnerUganda", "ss_ratio": -0.136, "Origin": "Uganda"},
+                        {"cohort": "UgandaRakai", "ss_ratio": 0.459, "Origin": "Uganda"}
+                    ]
+                },
+            "mark": "bar",
+            "params": [{
+                "name": "location",
+                "select": {"type": "point", "fields": ["Origin"]},
+                "bind": "legend"
+            }],
+            "encoding": {
+                "y": {
+                "field": "ss_ratio",
+                "type": "quantitative",
+                "title": "Sink/Source Ratio",
+                "axis": {"labelFontSize":12,"titlePadding":5,"titleFontSize":14}
+                },
+                "x": {
+                "field": "cohort",
+                "type": "ordinal",
+                "title": "Cohort",
+                "axis": {"labelFontSize":12,"titleFontSize":14}
+                },
+                "color": {"field": "Origin", "type": "nominal"},
+                "opacity": {
+                "condition": {"param": "location", "value": 1},
+                "value": 0.2
+                },
+                "tooltip": [
+                {"field": "ss_ratio", "type": "quantitative","title":"Source/Sink Ratio"}
+                ]
+            }
+		};
+
+     // Embed the visualization in the container with id `vis`
+	vegaEmbed('#vis', vlSpec);
+
+    </script>
+  </body>
+</html>
