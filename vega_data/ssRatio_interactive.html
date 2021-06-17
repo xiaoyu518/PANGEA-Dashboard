@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Legend Interaction Test</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style media="screen">
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="vis"></div>
+    <script>
+    	// Assign the specification to a local variable vlSpec.
+    	var vlSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": {
+                "text": "Source Sink Ratios for Individual Cohorts",
+                "fontSize":16,
+                "offset":20
+            },
+            "width": 600, "height": 400,
+            "data": {
+                    "values": [
+                        {"cohort": "Popart-Copperbelt", "ss_ratio": -0.003},
+                        {"cohort": "AHRISouthAfrica", "ss_ratio": 0.019},
+                        {"cohort": "Popart-Southern", "ss_ratio": 0.075},
+                        {"cohort": "LANL", "ss_ratio": 0.102},
+                        {"cohort": "PartnerBotswana", "ss_ratio": -0.146},
+                        {"cohort": "PartnerKenya", "ss_ratio": -0.03},
+                        {"cohort": "PartnerUganda", "ss_ratio": 0.174},
+                        {"cohort": "Botswana", "ss_ratio": 0.195},
+                        {"cohort": "PartnerTanzania", "ss_ratio": -0.234},
+                        {"cohort": "UgandaRakai", "ss_ratio": 0.079},
+                        {"cohort": "MRCUganda", "ss_ratio": -0.054},
+                        {"cohort": "PartnerSouthAfrica", "ss_ratio": -0.159},
+                        {"cohort": "Popart-Central", "ss_ratio": 0.016}
+                    ]
+            },
+            "encoding": {
+                "y": {
+                "field": "cohort", 
+                "type": "nominal", 
+                "sort": "-x", 
+                "title": null,
+                "axis": {"labelFontSize":12}
+                },
+                "x": {
+                "field": "ss_ratio", 
+                "type": "quantitative", 
+                "title": null,
+                "axis": {"labelFontSize":12},
+                "scale": {"domain": [-0.3, 0.25]}
+                }
+            },
+            "layer": [{
+                "mark": "bar",
+                "encoding": {
+                "color": {
+                    "field": "ss_ratio",
+                    "type": "quantitative",
+                    "title": "Source/Sink Ratio"
+                }
+                }
+            }, {
+                "mark": {
+                "type": "text",
+                "align": "right",
+                "xOffset": -1,
+                "aria": false,
+                "fontSize": 12
+                },
+                "encoding": {
+                "text": {"field": "ss_ratio", "type": "quantitative"},
+                "color": {
+                    "condition": {
+                    "test": {"field": "ss_ratio", "gt": 0},
+                    "value": "red"
+                    },
+                    "value": "blue"
+                }
+                }
+            }]
+		};
+
+     // Embed the visualization in the container with id `vis`
+	vegaEmbed('#vis', vlSpec);
+
+    </script>
+  </body>
+</html>
