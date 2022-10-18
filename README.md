@@ -1,4 +1,4 @@
 # PANGEA Dashboard
 
-Repository for Narrative Files for Auspice representation on the PANGEA Dashboard.
+Repository for files related to the PANGEA Dashboard.
 
