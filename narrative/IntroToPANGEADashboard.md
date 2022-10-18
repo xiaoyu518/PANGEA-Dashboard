@@ -1,11 +1,11 @@
 ---
 title: Phylogenetic Analysis of Pangea 2 HIV data
 authors: "Xiaoyu Yu"
-authorLinks: "https://www.pangea-hiv.org/"
+authorLinks: "xiaoyu.yu@ed.ac.uk"
 affiliations: "PANGEA 2, University of Edinburgh"
-date: "25 May 2021"
+date: "15 September 2021"
 dataset: "http://localhost:4000/pol/20210524?d=map&c=cohort"
-abstract: "This report shows the HIV genomic Data taken from different Sub-Saharan African countries coloured by different cohorts. Dataset contains a collaboration of PANGEA and Los Alamos HIV sequences including 17 cohorts. In depth phylogenetic analyses have been done on pol, gag and env regions with interactive display on desktop browsers."
+abstract: "This report shows the HIV genomic Data taken from different Sub-Saharan African countries coloured by different cohorts. Dataset contains a collaboration of PANGEA and Los Alamos HIV sequences including 17 cohorts. In depth phylodynamic analyses have been done on pol, gag and env regions with interactive display on desktop browsers."
 ---
 
 # [Executive Summary](http://localhost:4000/pol/20210524)
@@ -17,10 +17,19 @@ abstract: "This report shows the HIV genomic Data taken from different Sub-Sahar
 
 Using _PANGEA_ and Los Alamos Database (_LANL_), we extracted HIV whole genome sequences to examined genetic diversity to infer date of common ancestor and rate of spread utilising phylogenetic analytical tools.
 
-* We have extracted 12482 pol, gag and env sequences with high coverage and genome sequence length covering >90% of consensus alignment sequence based on all _PANGEA_ and _LANL_ samples used within the analysis.
+* We have extracted 12896 pol, gag and env sequences with high coverage and genome sequence length covering >90% of consensus alignment sequence based on all _PANGEA_ and _LANL_ samples used within the analysis.
 * Time span of samples range from 1983 to May 2019 with _LANL_ sequences (1983 - 2016) used as mainly background sequences for the phylogenetic analysis of the _PANGEA_ (2003 - 2019).
 * The vast majority of PANGEA sequences are from _Botswana, Kenya, South Africa, Uganda, Tanzania and Zambia_. Additional sequences from LANL are from _Angola, Benin, Cameroon, Central African Republic, Cote d'Ivoire, Democratic Republic of the Congo, Ethiopia, Gabon, Ghana, Guinea Bissau, Malawi, Nigeria, Rwanda, Senegal and Somalia_.
 * 12 whole genome subtypes are found within the dataset (A, A1, A2, B, C, D, F1, F2, G, H, J, K) with low number but wide variety of recombinant subtypes.
+
+Follow up phylodynamic analysis was done using BEAST discrete trait and skygrid coalescent estimations on effective population for each individual cohort and trait transitions between cohorts.
+
+* Comparison of gag, pol and env skygrid estimations alongside sampling date and incidence rate for the outlining country containing the cohort. 
+* Source and Sink ratio estimations for each individual cohort from the date 1989 onwards.
+* Transmission event count for each individual cohort from the date 1989 onwards.
+* Transition event count between Uganda cohort and outside Uganda as case study.
+* Import intensity plot for Uganda and outside Uganda cohort as case study.
+
 ```
 
 # [PANGEA HIV Project](http://localhost:4000/pol/20210524)
@@ -36,6 +45,13 @@ Using _PANGEA_ and Los Alamos Database (_LANL_), we extracted HIV whole genome s
     * [The Rakai Health Sciences Program](https://www.rhsp.org)
     * [HIV Prevention Trials Network (HPTN) PopART Phylogenetics](https://www.hptn.org/research/studies/hptn071)
     * [Los Alamos HIV database](https://www.hiv.lanl.gov/content/index)
+* Bayesian Evolutionary Analysis Sampling Trees: [BEAST](https://beast.community/)
+    * [Skygrid Coalescent](https://academic.oup.com/mbe/article/30/3/713/1041171)
+    * [BSSVS discrete Traits](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000520)
+* Quick Vocabulary:
+    * [Coalescent Theory](https://www.sciencedirect.com/science/article/pii/0304414982900114?via%3Dihub)
+    * [Sources and Sinks](https://www.pangea-hiv.org/research)
+    * [Effective population size](https://www.nature.com/articles/nrg2526)
 
 ```auspiceMainDisplayMarkdown
 
@@ -55,6 +71,17 @@ Source: [UNAIDS](https://www.unaids.org/en/frequently-asked-questions-about-hiv-
 
 #### Genomes
 The genetic sequence encoding everything the virus/organism needs to function and reproduce, stored as a DNA or RNA molecule. A whole genome sequence involves uncovering the order of bases in a complete genome of an organism while a partial genome is a section of the whole genome of interest normally a protein sequence(s). In our case, the pol, gag and env gene sequence are used as these are often used for phylogenetic studies and subtyping as these core genes representing important regions such as encoding the structural proteins involved in viral particle formation (gag); encoding the envelope protein (env); encoding the enzymes for replication (protease, RT, RNase H, integrase) (pol). 
+
+<p>&nbsp;</p>
+
+#### Quick Vocabulary
+
+* **Skygrid**: Bayesian nonparametric model that estimates the effective population size over time, directly from a sample of multilocus molecular sequence data. 
+* **Source**: Cohort in a population that disproportionately pass on infections 
+* **Sink**: Cohort in a population that disproportionately receives infections
+* **Import**: Infection transimitted by an individual from one cohort from another cohort
+* **Export**: Infection passed by an individual from one cohort onto another cohort
+* **Effective Population**: The effective size of a population, Ne, determines the rate of change in the composition of a population caused by genetic drift, which is the random sampling of genetic variants in a finite population. It translates census sizes of a real population into the size of an idealized population showing the same rate of loss of genetic diversity as the real population under study
 
 <p>&nbsp;</p>
 
@@ -157,7 +184,7 @@ To date, PANGEA includes sequences from six different collaborators:
 * Partner cohorts in Kenya, Uganda, Tanzania, Botswana and South Africa
 * AHRI cohort in South Africa
 * BCCP cohort in Botswana
-* PopART Phylogenetics samples from Zambia (Central, Copperbelt and Southern provinces)
+* PopART Phylogenetics samples from Zambia (Central, Copperbelt, Lusaka and Southern)
 
 LANL sequences from across sub-Saharan Africa are used as background sequences.
 
@@ -209,3 +236,82 @@ Different tree layouts are possible and this one shows the temporal divergence (
 
 Another phylogenetic tree layout, the Radial format. Different tree formats can be changed in Auspice and can be used and extracted for external presentation.
 
+
+# [Skygrid coalescent model estimations of effective population size between 1981-2020 for PANGEA and LANL dataset](http://localhost:4000/pol/20210524)
+
+Estimation of the effective population size of the whole [PANGEA](https://www.pangea-hiv.org/) and [LANL](https://www.hiv.lanl.gov/content/index) dataset based on the skygrid coalescent model. The red line indicates the mean skygrid estimations in log scale of the pol phylogenetic tree within the timeframe indicated by the x-axis. The light pink surrounding the red line indicates the upper and lower confidence interval of the estimation. Similarly, gag and env are shown in orange and blue respectively. The light purple carpet plot on the bottom indicate the time of sampling and the purple line indicate the average incidence rate of all ages per 1000 population between 1990 and 2020 in the PANGEA dataset (_South Africa, Bptswana, Zambia, Kenya, Uganda_) with the percentage indicated by the y-axis on the right. Iframe is interactive and gag, pol and env mean skygrid estimates are shown by hovering mouse over the year of interest. Plot can be downloaded in different formats (SVG and PNG) by clicking on the top right three dots button for a drop down menu.
+
+Although the topology for gag, pol and env [phylogenetic trees](https://www.pangea-hiv.org/visualisations) differ greatly, the skygrid estimations shares a similar shape and trend and overlaps well after 1988 within each other's confidence intervals. This may be due to old recombination events causing issues estimating the correct topology and in turn influence the correct estimation of effective population size from genetic diversity. However, based on the resulting skygrid estimations, the effective population estimates for recent times (overlaps of the three gene regions) give good indication and representation of the whole population trend within the dataset. This result is shared and shown for all individual cohorts within this narrative which can be seen in this [link](https://xiaoyu518.github.io/). 
+
+The correlation between the incidence curve and the skygrid estimation is also very high showing initial increase and gradual decrease  to recent years. The decreasing trend in the estimations have shown that the PANGEA data is also showing effective measures reducing incidence in recent years.
+
+```auspiceMainDisplayMarkdown
+
+<iframe width="1010" height="550" frameBorder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://xiaoyu518.github.io/PANGEA_Skygrid.html"></iframe>
+
+Incidence rate data source: https://aidsinfo.unaids.org/
+
+```
+
+# [Skygrid coalescent model estimations of effective population size between 1981-2020 for Uganda cohorts](http://localhost:4000/pol/20210524)
+
+Estimation of the effective popluation size of all Uganda cohorts ([Uganda Rakai](https://www.rhsp.org), [Partner Uganda](http://depts.washington.edu/uwicrc/?q=content/about-icrc), [MRC Uganda](https://www.mrcuganda.org)) based on the skygrid coalescent model. The different coloured line indicate the mean skygrid estimations of different cohorts in Uganda in log scale indicated by the x-axis. The errorband surrounding the line indicates the upper and lower confidence interval of the estimation. Hovering over the graph allows comparison of skygrid estimations at each time points. Sampling time carpet plots are shown in the bottom right corner with the same colour code. Purple line indicate the incidence rate per 1000 population for all ages in Uganda indicated in percentage by the right y-axis. Colour code of each individual cohort name are indicated by the legend on the top right corner.
+
+The three Uganda cohorts show a similar trend peaking at various time points around 1998 and followed by a decrease to recent years compared to the incidence rate curve. The different decreasing trend between cohorts and incidence rate show groups in the population and their population dynamic compared to the background Uganda population. Interesting trends such as the Rakai's re-insurgence from 2016 or the bigger decrease in effective population of Partner cohort compared to the other two Ugandan cohorts may be interesting to look at in detail.
+
+```auspiceMainDisplayMarkdown
+
+<iframe width="1050" height="550" frameBorder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://xiaoyu518.github.io/Uganda_Skygrid.html"></iframe>
+
+Incidence rate data source: https://aidsinfo.unaids.org/
+
+```
+
+# [Source Sink Ratio estimates and import and export events for individual cohorts from 1989](http://localhost:4000/pol/20210524)
+
+Source and Sink: An epidemic can be described by a model of connected sources, sinks, and hubs. Sources are groups in a population that disproportionately pass on infections, sinks are groups that disproportionately receive infections, and hubs are both sources and sinks. Population groups can be defined by age, gender, riskiness of sexual behaviour, geography, occupation, cultural preferences and norms, migrational behaviour, or other characteristics and combinations thereof. Identifying these groups allows prevention to be tailored.
+
+Through the analysis of the skygrids of gag, pol and env for each individual cohort, the overlap of these three plots have shown high accuracy of the phylogenetic tree in representing the genetic diversity from the year 2000 onwards. This is also a representation although the topology of the three gene region phylogenetic tree differ, the estimation for this time period remain robust. Hence there is high confidence there is reduced recombination when assessing transmission events for this time period between cohorts. Although the cutoff of 2000 onwards is more stringent in reducing recombination effect on phylogenetic tree, the number of transition events between the cohorts is limited. Hence as a tradeoff of stringency of control of recombination and assessing transmission events between cohorts, the cutoff of 1989 for both figure 1 and 2 is proposed. Transition events are taken by tree traversal and counting the number of node to tip trait change from the date 1989 onwards.
+
+Potential **sources** are coloured in light blue with blue text while **sinks** are coloured in dark blue with red text for the time period of 1989 - 2020 (Figure 1). Popart Copperbelt and Southern are potential hubs with equal import and export events. The longer the bar, the cohort is more likely to be either a source or sink. As an example, the Rakai Cohort is a potential sink with only import events (Figure 2) and could be a potential target for requiring more attention for prevention measures. Similarly, vice versa, Partner Uganda is a major exporter and a potential source. Import and export transition events for individual cohorts are tallied in Figure 2.
+
+```auspiceMainDisplayMarkdown
+
+<iframe width="880" height="490" frameBorder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://xiaoyu518.github.io/pol_ssRatio_1989.html"></iframe>
+<br/>
+Figure 1
+
+<p>&nbsp;</p>
+
+<iframe width="1300" height="370" frameBorder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://xiaoyu518.github.io/pol_ssEvents_1989.html"></iframe>
+<br/>
+Figure 2
+
+```
+
+# [Import and export events for Uganda cohorts from 1989](http://localhost:4000/pol/20210524)
+
+Import and export directionality between three Uganda cohorts (__Uganda Rakai, MRC Uganda and Partner Uganda__) and cohorts outside Uganda are displayed within the coloured bar plot. On the x-axis, the exporting cohort and on the y-axis the number of transition events. The legends shows the importing cohort and its corresponding colour. 
+
+Through this bar plot, we can see that Partner Uganda is a major exporter (source) while Uganda Rakai is a major importer (sink). There are mainly internal transition events between Ugandan cohorts with a few imports from outside Uganda but only 3 export out of Uganda. 
+
+```auspiceMainDisplayMarkdown
+
+<iframe width="770" height="350" frameBorder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://xiaoyu518.github.io/pol_Uganda_Cohort_Transition.html"></iframe>
+
+```
+
+# [Import intensity plot for Uganda cohorts from 1989](http://localhost:4000/pol/20210524)
+
+Import intensity plot is used to analyse the import transition event effect on the cohort through the analysis of the skygrid plot and the import timing into that cohort. Import timing is estimated as the midpoint date between the node and the tip having the transition event between two different cohorts. Directionality of the transition events are shown by different shapes coded by the legend on the right side of the plot.
+
+Skygrid plots are shown for all three Uganda cohorts (pol) alongside incidence rate for Uganda in purple. Based on the different import events into the three Ugandan cohort, the increases in effective population size estimated by the skygrid can be partially explained by the imports from other cohorts. For example, Uganda Rakai, the slight increase in 2006 to 2008 can be associated with the imports from Partner cohort (upside down triangle) and the re-insurgence from 2016 is associated with the grouped imports from MRC Uganda and Outside Uganda (circle and crosses). Similarly, the mountain like shape for MRC Uganda between dates 2002 and 2006 can be associated with the imports from Partners and outside Uganda cohorts (square and kite). Therefore, although overall the incidence rate is dropping, the effective population of individual cohort such as Rakai are still high due to imports from other cohorts. 
+
+
+```auspiceMainDisplayMarkdown
+
+<iframe width="1100" height="560" frameBorder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://xiaoyu518.github.io/pol_Uganda_Import_Intensity.html"></iframe>
+
+Incidence rate data source: https://aidsinfo.unaids.org/
+
+```
